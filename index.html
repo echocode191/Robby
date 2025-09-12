@@ -27,15 +27,55 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background);
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 168, 89, 0.1);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px) scale(1.1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-200px) translateX(-30px) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-50px) translateX(70px) scale(1.05);
+                opacity: 0.6;
+            }
         }
         
         header {
@@ -43,8 +83,22 @@
             padding: 40px 0;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--text-light);
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .logo-container {
@@ -53,6 +107,16 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
         
         .logo {
@@ -63,7 +127,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
         
         .logo img {
@@ -75,6 +149,17 @@
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--text-light);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
         }
         
         .tagline {
@@ -82,12 +167,32 @@
             font-weight: 600;
             color: var(--text-light);
             margin-bottom: 10px;
+            animation: bounce 1.5s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
         
         .subtitle {
             font-size: 1.2rem;
             color: var(--text-light);
             opacity: 0.9;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         
         .whatsapp-float {
@@ -101,18 +206,28 @@
             border-radius: 50px;
             text-align: center;
             font-size: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            animation: whatsappFloat 3s infinite ease-in-out;
             transition: all 0.3s ease;
         }
         
+        @keyframes whatsappFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.1);
+            }
+        }
+        
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: scale(1.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
         .nav-tabs {
@@ -120,40 +235,77 @@
             justify-content: center;
             margin: 30px 0;
             background: var(--light);
-            border-radius: 10px;
+            border-radius: 50px;
             padding: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .nav-tab {
             padding: 12px 25px;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
             color: var(--text-dark);
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
         }
         
         .nav-tab.active {
             background: var(--primary);
             color: var(--text-light);
             font-weight: 600;
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
         
         .tab-content {
             display: none;
+            animation: fadeInTab 0.5s ease-out;
+        }
+        
+        @keyframes fadeInTab {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         
         .section-title {
@@ -163,6 +315,7 @@
             text-align: center;
             color: var(--primary);
             position: relative;
+            animation: fadeIn 1s ease-out;
         }
         
         .section-title::after {
@@ -175,6 +328,16 @@
             height: 3px;
             background: var(--primary);
             border-radius: 2px;
+            animation: expandWidth 1s ease-out;
+        }
+        
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 80px;
+            }
         }
         
         .deals-grid {
@@ -186,14 +349,33 @@
         
         .deal-card {
             background: var(--light);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            animation: slideInUp 0.6s ease-out both;
         }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .deal-card:nth-child(1) { animation-delay: 0.1s; }
+        .deal-card:nth-child(2) { animation-delay: 0.2s; }
+        .deal-card:nth-child(3) { animation-delay: 0.3s; }
+        .deal-card:nth-child(4) { animation-delay: 0.4s; }
+        .deal-card:nth-child(5) { animation-delay: 0.5s; }
+        .deal-card:nth-child(6) { animation-delay: 0.6s; }
         
         .deal-card::before {
             content: '';
@@ -203,11 +385,17 @@
             width: 5px;
             height: 100%;
             background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .deal-card:hover::before {
+            transform: scaleY(1);
         }
         
         .deal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         .deal-price {
@@ -215,6 +403,23 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .deal-price::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .deal-card:hover .deal-price::after {
+            width: 100%;
         }
         
         .deal-details {
@@ -246,19 +451,41 @@
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .whatsapp-btn:hover {
             background: #128C7E;
-            transform: scale(1.02);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .about-section {
             background: var(--light);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 30px;
             margin: 40px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 1s ease-out 0.5s both;
         }
         
         .about-title {
@@ -276,6 +503,16 @@
         
         .about-content p {
             margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .about-content p::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
         }
         
         .about-content strong {
@@ -284,11 +521,12 @@
         
         .contact-section {
             background: var(--light);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 30px;
             margin: 40px 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 1s ease-out 0.7s both;
         }
         
         .contact-title {
@@ -309,11 +547,30 @@
             align-items: center;
             gap: 10px;
             font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(0, 168, 89, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 168, 89, 0.2);
+            transform: translateY(-5px);
         }
         
         .contact-item i {
             color: var(--primary);
             font-size: 1.3rem;
+            animation: iconPulse 2s infinite;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
         }
         
         footer {
@@ -322,7 +579,8 @@
             text-align: center;
             padding: 25px 0;
             margin-top: 40px;
-            border-radius: 12px 12px 0 0;
+            border-radius: 15px 15px 0 0;
+            animation: slideUp 0.8s ease-out 0.9s both;
         }
         
         .note {
@@ -331,6 +589,18 @@
             padding: 15px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         @media (max-width: 768px) {
@@ -372,6 +642,9 @@
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg"></div>
+    
     <!-- WhatsApp Button -->
     <div class="whatsapp-float" onclick="quickWhatsApp()">
         <i class="fab fa-whatsapp"></i>
@@ -585,6 +858,31 @@
     </div>
     
     <script>
+        // Create animated background bubbles
+        function createBubbles() {
+            const bg = document.getElementById('animatedBg');
+            const bubbleCount = 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Random size
+                const size = Math.random() * 100 + 50;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                bubble.style.animationDelay = `${Math.random() * 15}s`;
+                
+                bg.appendChild(bubble);
+            }
+        }
+        
         // WhatsApp ordering function
         function orderOnWhatsApp(dealDetails) {
             const phoneNumber = "254113331308"; // Kenya country code + number
@@ -623,6 +921,17 @@
             // Add active class to clicked tab
             event.target.classList.add('active');
         }
+        
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            createBubbles();
+            
+            // Add stagger animation to deal cards
+            const dealCards = document.querySelectorAll('.deal-card');
+            dealCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
     </script>
 </body>
 </html>
